@@ -25,16 +25,11 @@
 
 # Code flow
 
-## 1. Set-up
+## 1. Preprocessing
 
+## 2. Model training
 
-## 2. Preprocessing
-
-
-## 3. Model training
-
-
-## 4. Model evaluation
+## 3. Model evaluation
 
 
 

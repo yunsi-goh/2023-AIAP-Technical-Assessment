@@ -27,18 +27,14 @@ while getopts "i:t:n" opt; do
 done
 
 
-# 1. Set-up
-echo "1. Set-up"
-pip install -r requirements.txt
-
-# 2. Preprocessing
-echo "2. Preprocessing"
+# 1. Preprocessing
+echo "1. Preprocessing"
 python src/preprocessing.py -i "$in_dir"
 
-# 3. Model training
-echo "3. Model training"
+# 2. Model training
+echo "2. Model training"
 python src/train.py -t "$model_type" -n "$model_name"
 
-# 4. Model evaluation
-echo "4. Model evaluation"
+# 3. Model evaluation
+echo "3. Model evaluation"
 python src/evaluate.py -n "$model_name"
