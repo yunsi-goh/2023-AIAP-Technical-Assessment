@@ -6,17 +6,9 @@ import numpy as np
 from sklearn.preprocessing import OneHotEncoder
 
 
-# Get folder paths
-parser = argparse.ArgumentParser()
-parser.add_argument("-i", "--in_dir", type=str, help='Input cruise data directory', required=True)
-args = parser.parse_args()
-
-
 """
 Functions
 """
-
-
 def load_cruise_data(in_dir):
     print("Loading data...")
 
@@ -32,7 +24,6 @@ def load_cruise_data(in_dir):
     cruise = cruise_pre.merge(cruise_post, on=["index", "Ext_Intcode"])
 
     return cruise
-
 
 def rename_cruise_col(cruise):
     print("Renaming columns...")
@@ -67,7 +58,6 @@ def rename_cruise_col(cruise):
 
     return cruise
 
-
 def remove_cruise_duplicates(cruise):
     print("Removing duplicates...")
 
@@ -81,7 +71,6 @@ def remove_cruise_duplicates(cruise):
     cruise = cruise.drop(["index", "Ext_Intcode", "log_time"], axis="columns")
 
     return cruise
-
 
 def cruise_ft_eng(cruise):
     print("Performing feature engineering...")
@@ -314,7 +303,6 @@ def cruise_ft_eng(cruise):
 
     return cruise
 
-
 def transform_cruise(cruise):
     print("Applying transformations...")
 
@@ -324,7 +312,6 @@ def transform_cruise(cruise):
     cruise = cruise.drop(["age", "distance_km"], axis="columns")
 
     return cruise
-
 
 def impute_cruise(cruise):
     print("Performing data imputation...")
@@ -414,6 +401,11 @@ Main
 """
 if __name__ == '__main__':
 
+    # Get folder paths
+    parser = argparse.ArgumentParser()
+    parser.add_argument("-i", "--in_dir", type=str, help='Input cruise data directory', required=True)
+    args = parser.parse_args()
+
     # Preprocessing
     data = load_cruise_data(args.in_dir)  # Load data
     data = rename_cruise_col(data)  # Rename columns
@@ -425,9 +417,6 @@ if __name__ == '__main__':
     # Save preprocessed data
     if not os.path.exists("output"):
         os.mkdir("output")
-    if not os.path.exists("output"):
-        data.to_csv(os.path.join("output", "preprocessed.csv"), index=False)
-    else:
-        print("WARNING: preprocessed.csv already exists and will not be exported .")
+    data.to_csv(os.path.join("output", "preprocessed.csv"), index=False)
 
     print("Completed!")
