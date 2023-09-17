@@ -8,8 +8,7 @@ from sklearn.preprocessing import OneHotEncoder
 
 # Get folder paths
 parser = argparse.ArgumentParser()
-parser.add_argument("--pre", type=str, help='Path to cruise_pre.db', required=True)
-parser.add_argument("--post", type=str, help='Path to cruise_post.db', required=True)
+parser.add_argument("-i", "--in_dir", type=str, help='Input cruise data directory', required=True)
 args = parser.parse_args()
 
 
@@ -18,15 +17,15 @@ Functions
 """
 
 
-def load_cruise_data(cruise_pre_path, cruise_post_path):
+def load_cruise_data(in_dir):
     print("Loading data...")
 
     # Load pre-trip data
-    cruise_pre_con = sqlite3.connect(cruise_pre_path)
+    cruise_pre_con = sqlite3.connect(os.path.join(in_dir, "cruise_pre.db"))
     cruise_pre = pd.read_sql_query("SELECT * FROM cruise_pre", cruise_pre_con)
 
     # Load post-trip data
-    cruise_post_con = sqlite3.connect(cruise_post_path)
+    cruise_post_con = sqlite3.connect(os.path.join(in_dir, "cruise_post.db"))
     cruise_post = pd.read_sql_query("SELECT * FROM cruise_post", cruise_post_con)
 
     # Merge pre-trip and post-trip data
@@ -416,7 +415,7 @@ Main
 if __name__ == '__main__':
 
     # Preprocessing
-    data = load_cruise_data(args.pre, args.post)  # Load data
+    data = load_cruise_data(args.in_dir)  # Load data
     data = rename_cruise_col(data)  # Rename columns
     data = remove_cruise_duplicates(data)  # Remove duplicates
     data = cruise_ft_eng(data)  # Feature engineering
@@ -426,6 +425,9 @@ if __name__ == '__main__':
     # Save preprocessed data
     if not os.path.exists("output"):
         os.mkdir("output")
-    data.to_csv(os.path.join("output", "preprocessed.csv"), index=False)
+    if not os.path.exists("output"):
+        data.to_csv(os.path.join("output", "preprocessed.csv"), index=False)
+    else:
+        print("WARNING: preprocessed.csv already exists and will not be exported .")
 
     print("Completed!")
