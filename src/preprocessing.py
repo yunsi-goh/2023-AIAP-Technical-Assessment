@@ -1,7 +1,6 @@
 import os
 import argparse
 import sqlite3
-import sqlalchemy
 import pandas as pd
 import numpy as np
 from sklearn.preprocessing import OneHotEncoder
@@ -427,7 +426,6 @@ if __name__ == '__main__':
     # Save preprocessed data
     if not os.path.exists("output"):
         os.mkdir("output")
-    engine = sqlalchemy.create_engine('sqlite://', echo=False)
-    data.to_csv("preprocessed.csv", index=False)
+    data.to_csv(os.path.join("output", "preprocessed.csv"), index=False)
 
     print("Completed!")
