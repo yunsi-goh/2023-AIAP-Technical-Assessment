@@ -14,10 +14,10 @@ if __name__ == '__main__':
     parser = argparse.ArgumentParser()
     parser.add_argument("-n", "--model_name", type=str, help='Saved name of model', required=True)
     args = parser.parse_args()
-    model = joblib.load(os.path.join("../output", args.model_name+".pkl"))
+    model = joblib.load(os.path.join("output", args.model_name+".pkl"))
 
     # Load data
-    file_path = os.path.join("../output", "preprocessed.csv")
+    file_path = os.path.join("output", "preprocessed.csv")
     X_train, X_test, y_train, y_test = load_preprocessed(file_path)
 
     # Evaluate training
