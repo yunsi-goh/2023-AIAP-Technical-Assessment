@@ -2,8 +2,8 @@
 
 
 # Define arguments
-model_type="SVM"
-model_name="model_SVM"
+model_type="KNN"
+model_name="model_KNN"
 
 
 # Parse command-line arguments using the Python script

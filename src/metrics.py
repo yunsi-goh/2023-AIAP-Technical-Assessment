@@ -1,6 +1,7 @@
 import pandas as pd
 from sklearn import metrics
 
+
 def confusion_matrix(model, y_actual, y_pred):
 
     # Get confusion matrix

@@ -12,8 +12,8 @@ if __name__ == '__main__':
 
     # Get model choice
     parser = argparse.ArgumentParser()
-    parser.add_argument("-t", "--model_type", type=str, help='RF / SVM', required=True)
-    parser.add_argument("-n", "--model_name", type=str, help='Saved name of model', required=True)
+    parser.add_argument("-t", "--model_type", type=str, help="RF / SVM / KNN", required=True)
+    parser.add_argument("-n", "--model_name", type=str, help="Saved name of model", required=True)
     args = parser.parse_args()
 
     # Load data
@@ -29,6 +29,8 @@ if __name__ == '__main__':
         print("Training Support Vector Machine model...")
         model = train_SVM(X_train, y_train)
         print("Saving Support Vector Machine model...")
+    else:
+        print("WARNING: Choose a valid model: RF / SVM / KNN")
     joblib.dump(model, os.path.join("output", args.model_name+".pkl"))
 
     # Computing time

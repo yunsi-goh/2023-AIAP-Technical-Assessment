@@ -10,10 +10,18 @@ RF_params = {
     'random_state': [random_state]
 }
 
-# Support vector machine
+# Support vector machine parameters
 SVM_params = {
     'C': [1e-2, 1e-1, 1e-0, 1e1, 1e2],
     'gamma': [1e-2, 1e-1, 1e-0, 1e1, 1e2],
     'kernel': ['rbf', 'sigmoid', 'poly', 'linear'],
+    'random_state': [random_state]
+}
+
+# Support vector machine parameters
+KNN_params = {
+    'n_neighbors': [5, 10, 15, 20],
+    'weights': ['uniform', 'distance'],
+    'metric' : ['minkowski', 'euclidean', 'manhattan'],
     'random_state': [random_state]
 }
