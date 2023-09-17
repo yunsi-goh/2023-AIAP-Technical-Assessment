@@ -11,11 +11,10 @@ if __name__ == '__main__':
     start = datetime.datetime.now()
 
     # Get model
-    # parser = argparse.ArgumentParser()
-    # parser.add_argument("-n", "--model_name", type=str, help='Saved name of model', required=True)
-    # args = parser.parse_args()
-    model_name="model_RF"
-    model = joblib.load(os.path.join("../output", model_name+".pkl"))
+    parser = argparse.ArgumentParser()
+    parser.add_argument("-n", "--model_name", type=str, help='Saved name of model', required=True)
+    args = parser.parse_args()
+    model = joblib.load(os.path.join("../output", args.model_name+".pkl"))
 
     # Load data
     file_path = os.path.join("../output", "preprocessed.csv")
