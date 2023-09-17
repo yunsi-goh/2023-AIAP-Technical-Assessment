@@ -6,7 +6,9 @@
 
 ```
    .
-   └── .github                      
+   └── .github     
+   └── data                         <--- [not uploaded] input data folder
+   └── output                       <--- output folder             
    └── src                          
    │    ├── config.py               <--- script for setting training parameters
    │    ├── evaluate.py             <--- script to evaluate models
