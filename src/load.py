@@ -3,6 +3,7 @@ import pandas as pd
 import config as cfg
 from sklearn.model_selection import train_test_split
 
+
 def load_preprocessed(file_path):
 
     # Load data
