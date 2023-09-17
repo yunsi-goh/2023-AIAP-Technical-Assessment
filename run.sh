@@ -3,19 +3,24 @@
 
 # Define arguments
 in_dir="../data"
-model_choice="RF"
+model_type="RF"
+model_name="model_RF"
+
 
 # Parse command-line arguments using the Python script
-while getopts "i:m" opt; do
+while getopts "i:t:n" opt; do
     case "$opt" in
         i)
             in_dir="$OPTARG"
             ;;
-        m)
-            model_choice="$OPTARG"
+        t)
+            model_type="$OPTARG"
+            ;;
+        n)
+            model_name="$OPTARG"
             ;;
         \?)
-            echo "Usage: $0 [-i in_dir] [-m model_choice] "
+            echo "Usage: $0 [-i in_dir] [-t model_type] [-n model_name] "
             exit 1
             ;;
     esac
@@ -32,7 +37,8 @@ python src/preprocessing.py -i "$in_dir"
 
 # 3. Model training
 echo "3. Model training"
-#python src/train.py -m "RF"
+python src/train.py -t "$model_type" -n "$model_name"
 
 # 4. Model evaluation
 echo "4. Model evaluation"
+python src/evaluate.py -n "$model_name"
