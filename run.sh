@@ -29,7 +29,7 @@ done
 
 # 1. Set-up
 echo "1. Set-up"
-conda install --yes --file requirements.txt
+pip install -r requirements.txt
 
 # 2. Preprocessing
 echo "2. Preprocessing"
