@@ -9,6 +9,7 @@ from sklearn.preprocessing import OneHotEncoder
 """
 Functions
 """
+
 def load_cruise_data(in_dir):
     print("Loading data...")
 
@@ -401,13 +402,12 @@ Main
 """
 if __name__ == '__main__':
 
-    # Get input directory
-    parser = argparse.ArgumentParser()
-    parser.add_argument("-i", "--in_dir", type=str, help='Input cruise data directory', required=True)
-    args = parser.parse_args()
+    # Set directory
+    in_dir = "data"
+    out_dir = "output"
 
     # Preprocessing
-    data = load_cruise_data(args.in_dir)  # Load data
+    data = load_cruise_data(in_dir)  # Load data
     data = rename_cruise_col(data)  # Rename columns
     data = remove_cruise_duplicates(data)  # Remove duplicates
     data = cruise_ft_eng(data)  # Feature engineering
@@ -415,8 +415,8 @@ if __name__ == '__main__':
     data = impute_cruise(data)  # Data imputation
 
     # Save preprocessed data
-    if not os.path.exists("output"):
-        os.mkdir("output")
-    data.to_csv(os.path.join("output", "preprocessed.csv"), index=False)
+    if not os.path.exists(out_dir):
+        os.mkdir(out_dir)
+    data.to_csv(os.path.join(out_dir, "preprocessed.csv"), index=False)
 
     print("Completed!")
