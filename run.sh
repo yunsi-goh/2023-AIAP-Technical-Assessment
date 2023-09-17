@@ -2,8 +2,8 @@
 
 
 # Define arguments
-model_type="RF"
-model_name="model_RF"
+model_type="SVM"
+model_name="model_SVM"
 
 
 # Parse command-line arguments using the Python script

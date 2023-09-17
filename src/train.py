@@ -2,7 +2,7 @@ import os
 import argparse
 import datetime
 from load import load_preprocessed
-from models import train_RF
+from models import train_RF, train_SVM
 import joblib
 
 
@@ -25,6 +25,10 @@ if __name__ == '__main__':
         print("Training Random Forest model...")
         model = train_RF(X_train, y_train)
         print("Saving Random Forest model...")
+    elif args.model_type == "SVM":
+        print("Training Support Vector Machine model...")
+        model = train_SVM(X_train, y_train)
+        print("Saving Support Vector Machine model...")
     joblib.dump(model, os.path.join("output", args.model_name+".pkl"))
 
     # Computing time
