@@ -401,7 +401,7 @@ Main
 """
 if __name__ == '__main__':
 
-    # Get folder paths
+    # Get input directory
     parser = argparse.ArgumentParser()
     parser.add_argument("-i", "--in_dir", type=str, help='Input cruise data directory', required=True)
     args = parser.parse_args()
