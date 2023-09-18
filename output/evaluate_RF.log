@@ -1,0 +1,44 @@
+2023-09-18 17:23:26,781 - root - INFO - Training data: 90895
+2023-09-18 17:23:26,781 - root - INFO - Testing data: 38955
+2023-09-18 17:23:26,781 - root - INFO - ##### TRAINING LOG  #####
+2023-09-18 17:23:26,781 - root - INFO - MODEL: RandomForestClassifier(max_features='log2', n_estimators=1000, random_state=42)
+2023-09-18 17:23:46,640 - root - INFO - CONFUSION MATRIX:
+           Standard  Deluxe  Luxury
+Standard     42692       0       0
+Deluxe           0    5518       0
+Luxury           0       0   42685
+2023-09-18 17:23:46,640 - root - INFO - NORMALIZED CONFUSION MATRIX:
+           Standard  Deluxe  Luxury
+Standard       1.0     0.0     0.0
+Deluxe         0.0     1.0     0.0
+Luxury         0.0     0.0     1.0
+2023-09-18 17:23:46,640 - root - INFO - OVERALL ACCURACY: 1.0
+2023-09-18 17:23:46,750 - root - INFO - CLASSIFICATION REPORT:
+               precision  recall  f1-score  support
+Standard            1.0     1.0       1.0  42692.0
+Deluxe              1.0     1.0       1.0   5518.0
+Luxury              1.0     1.0       1.0  42685.0
+accuracy            1.0     1.0       1.0      1.0
+macro avg           1.0     1.0       1.0  90895.0
+weighted avg        1.0     1.0       1.0  90895.0
+2023-09-18 17:23:46,750 - root - INFO - ##### TESTING LOG #####
+2023-09-18 17:23:55,474 - root - INFO - CONFUSION MATRIX:
+           Standard  Deluxe  Luxury
+Standard     16174      13    2182
+Deluxe        2185       5     329
+Luxury        2948       3   15116
+2023-09-18 17:23:55,481 - root - INFO - NORMALIZED CONFUSION MATRIX:
+           Standard    Deluxe    Luxury
+Standard  0.880505  0.005161  0.120773
+Deluxe    0.118950  0.001985  0.018210
+Luxury    0.160488  0.001191  0.836664
+2023-09-18 17:23:55,482 - root - INFO - OVERALL ACCURACY: 0.8033628545757926
+2023-09-18 17:23:55,535 - root - INFO - CLASSIFICATION REPORT:
+               precision    recall  f1-score       support
+Standard       0.759093  0.880505  0.815304  18369.000000
+Deluxe         0.238095  0.001985  0.003937   2519.000000
+Luxury         0.857548  0.836664  0.846977  18067.000000
+accuracy       0.803363  0.803363  0.803363      0.803363
+macro avg      0.618246  0.573051  0.555406  38955.000000
+weighted avg   0.771066  0.803363  0.777527  38955.000000
+2023-09-18 17:23:55,536 - root - INFO - Completed in: 0 h 0 min 33 s
