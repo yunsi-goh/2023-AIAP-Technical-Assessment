@@ -30,11 +30,24 @@ def confusion_matrix(model, y_actual, y_pred):
     logging.info(f"NORMALIZED CONFUSION MATRIX:\n {cm_norm_disp}")
 
 
-def mean_accuracy(y_actual, y_pred):
+def overall_accuracy(y_actual, y_pred):
 
     # Calculate mean accuracy
     accuracy = metrics.accuracy_score(y_actual, y_pred)
 
     # Print mean accuracy
-    print("\nMEAN ACCURACY:", accuracy)
-    logging.info(f"MEAN ACCURACY: {accuracy}")
+    print("\nOVERALL ACCURACY:", accuracy)
+    logging.info(f"OVERALL ACCURACY: {accuracy}")
+
+def class_report(model, y_actual, y_pred):
+
+    # Calculate classification report
+    class_report = metrics.classification_report(y_actual, y_pred, labels=model.classes_, output_dict=True)
+    class_report = pd.DataFrame(class_report).transpose()
+    class_report = class_report.rename(index={"1.0": "Standard",
+                                              "2.0": "Deluxe",
+                                              "3.0": "Luxury"})
+
+    # Print classification report
+    print("\nCLASSIFICATION REPORT:\n", class_report)
+    logging.info(f"CLASSIFICATION REPORT:\n {class_report}")

@@ -3,7 +3,7 @@ import argparse
 import datetime
 import logging
 from load import load_preprocessed
-from metrics import confusion_matrix, mean_accuracy
+from metrics import confusion_matrix, overall_accuracy, class_report
 import joblib
 
 
@@ -35,14 +35,16 @@ if __name__ == '__main__':
     logging.info(f"MODEL: {model}")
     y_train_pred = model.predict(X_train)
     confusion_matrix(model, y_train, y_train_pred)
-    mean_accuracy(y_train, y_train_pred)
+    overall_accuracy(y_train, y_train_pred)
+    class_report(model, y_train, y_train_pred)
 
     # Evaluate testing
     print('\n\n##### TESTING LOG #####')
     logging.info("##### TESTING LOG #####")
     y_test_pred = model.predict(X_test)
     confusion_matrix(model, y_test, y_test_pred)
-    mean_accuracy(y_test, y_test_pred)
+    overall_accuracy(y_test, y_test_pred)
+    class_report(model, y_test, y_test_pred)
 
     # Computing time
     stop = datetime.datetime.now()
@@ -51,3 +53,4 @@ if __name__ == '__main__':
     h, m = divmod(m, 60)
     print("\nCompleted in: {} h {} min {} s".format(round(h), round(m), round(s)))
     logging.info("Completed in: {} h {} min {} s".format(round(h), round(m), round(s)))
+    logging.shutdown()
