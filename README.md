@@ -27,14 +27,54 @@
 
 # Code flow
 
+## 0. Setup
+   1. In __run.sh__, set the model to use:
+      * Line 5: *model_type*
+        * RF: Random Forest
+        * SVM: Support Vector Machine
+        * KNN: K-Nearest Neighbour
+      * Line 6: *model_name*
+   2. Execute the __run.sh__ file to run the commands in steps 1 - 3.
+
 ## 1. Preprocessing
-   *
+Command executed by __run.sh__:
+```
+python src/preprocessing.py
+```
+This script preprocess the cruise data in the following order:
+1. Load and merge pre-trip and post-trip data.
+2. Rename columns to keep them succinct.
+3. Remove duplicate submissions by each passenger.
+4. Clean up each feature and perform feature engineering.
+5. Transform features if necessary.
+6. Impute missing data.
+7. Export preprocessed data to: "output/preprocessed.csv"
 
 ## 2. Model training
-   *
+Command executed by __run.sh__:
+```
+python src/train.py -t "$model_type" -n "$model_name"
+``` 
+The procedure for model training is as follows:
+1. "load.py" is used to import and split the preprocessed data into train and test set.
+   * The split ratio can be changed by setting *test_size* in "config.py"
+2. "models.py" is used to build and train the various models available.
+   * Training configurations can be changed by setting *RF_params*, *SVM_params*, or *KNN_params* in "config.py"
+3. Final model is exported to: "output/{model_name}.pkl"
 
 ## 3. Model evaluation
-   *
+Command executed by __run.sh__:
+```
+python src/evaluate.py -n "$model_name"
+``` 
+The procedure for model evaluation is as follows:
+1. "load.py" is used to import and split the preprocessed data into train and test set.
+   * The train and test set will be consistent with the dataset used for model training as long as *test_size*
+     and *random_state* in "config.py" remains unchanged.
+2. "metrics.py" is used to evaluate model fit on both train and test set using the following metrics
+   * Confusion matrix
+   * Normalized confusion matrix
+   * Mean accuracy
 
 # Considerations
 
@@ -83,6 +123,8 @@
    *
 
 ## Choice of evaluation metrics
-
+   * Confusion matrix
+   * Normalized confusion matrix
+   * Mean accuracy
 
 ## Conclusion
