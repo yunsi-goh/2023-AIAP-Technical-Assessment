@@ -6,10 +6,23 @@
 
 ```
    .
-   └── .github     
-   └── data                         <--- [not uploaded] input data folder
-   └── output                       <--- output folder             
-   └── src                          
+   ├── .github     
+   ├── data                         <--- [not uploaded] input data folder
+   │    ├── cruise_pre.db
+   │    └── cruise_post.db
+   ├── output         
+   │    ├── evaluate_KNN.log        <--- log for model evaluation (renamed for KNN)
+   │    ├── evaluate_RF.log         <--- log for model evaluation (renamed for RF)
+   │    ├── evaluate_SVM.log        <--- log for model evaluation (renamed for SVM)
+   │    ├── model_KNN.pkl           <--- exported k-nearest neighbour model                     
+   │    ├── model_RF.pkl            <--- [not uploaded] exported random forest model
+   │    ├── model_SVM.pkl           <--- [not uploaded] exported support vector machine model
+   │    ├── preprocessed.csv        <--- preprocessed data
+   │    ├── preprocessing.log       <--- log for preprocessing
+   │    ├── train_KNN.log           <--- log for training (renamed for KNN)
+   │    ├── train_RF.log            <--- log for training (renamed for RF)
+   │    └── train_SVM.log           <--- log for training (renamed for SVM)
+   ├── src                          
    │    ├── config.py               <--- script for setting training parameters
    │    ├── evaluate.py             <--- script to evaluate models
    │    ├── load.py                 <--- script to load preprocessed data
@@ -17,11 +30,11 @@
    │    ├── models.py               <--- script containing different models
    │    ├── preprocessing.py        <--- script for data preprocessing
    │    └── train.py                <--- script to train models
-   └── .gitattributes
-   └── .gitignore
-   └── Readme.md                    <--- repository description
-   └── eda.ipynb                    <--- exploratory data analysis
-   └── requirements.txt             <--- dependencies
+   ├── .gitattributes
+   ├── .gitignore
+   ├── Readme.md                    <--- repository description
+   ├── eda.ipynb                    <--- exploratory data analysis
+   ├── requirements.txt             <--- dependencies
    └── run.sh                       <--- executable bash script
 ``` 
 
@@ -49,6 +62,7 @@ This script preprocess the cruise data in the following order:
 5. Transform features if necessary.
 6. Impute missing data.
 7. Export preprocessed data to: "output/preprocessed.csv"
+8. Log will be exported to: "output/preprocessing.log"
 
 ## 2. Model training
 Command executed by __run.sh__:
@@ -61,6 +75,7 @@ The procedure for model training is as follows:
 2. "models.py" is used to build and train the various models available.
    * Training configurations can be changed by setting *RF_params*, *SVM_params*, or *KNN_params* in "config.py"
 3. Final model is exported to: "output/{model_name}.pkl"
+4. Log will be exported to: "output/train.log"
 
 ## 3. Model evaluation
 Command executed by __run.sh__:
@@ -75,6 +90,7 @@ The procedure for model evaluation is as follows:
    * Confusion matrix
    * Normalized confusion matrix
    * Mean accuracy
+3. Log will be exported to: "output/evaluate.log"
 
 # Considerations
 
@@ -116,15 +132,25 @@ The procedure for model evaluation is as follows:
 
 ## Choice of models
 1. Random Forest (RF)
-   * 
+   * Accurate, generalizes well, and minimizes overfitting by using an ensemble of decision trees.
+   * Due to the ensemble method, it is less affected by outliers (outliers were not removed during preprocessing).
+   * Commonly used in other customer behaviour prediction problems as it works well with unknown distributions.
+   * Able to handle both the numerical and categorical variables found in the dataset.
+   * Provides feature importance information.
+   
 2. Support Vector Machine (SVM)
-   *
+   * Accurate even with high dimensions (preprocessed data contains 26 features) as different kernels can be used.
+   * Generalizes well and minimizes overfitting via regularization
+   * Less affected by outliers as the margin can be adjusted to ignore some outliers.
+   * Linear kernel provides feature importance information.
+   
 3. K-Nearest Neighbour (KNN)
-   *
+
+   
 
 ## Choice of evaluation metrics
    * Confusion matrix
    * Normalized confusion matrix
    * Mean accuracy
 
-## Conclusion
+## Results
