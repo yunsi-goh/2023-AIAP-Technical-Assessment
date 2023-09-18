@@ -6,23 +6,21 @@
 ```
    .
    ├── .github     
-   ├── data                         <--- [not uploaded - as per instruction] input data folder
+   ├── data                         <--- input data folder [NOT UPLOADED - as per instruction]
    │    ├── cruise_pre.db
    │    └── cruise_post.db
-   ├── output        
-   │    ├── evaluate.log            <--- log for model evaluation
-   │    ├── evaluate_KNN.log        <--- log for model evaluation (renamed for KNN)
-   │    ├── evaluate_RF.log         <--- log for model evaluation (copied and renamed for RF)
-   │    ├── evaluate_SVM.log        <--- log for model evaluation (copied and renamed for SVM)
-   │    ├── model_KNN.pkl           <--- exported k-nearest neighbour model                     
-   │    ├── model_RF.pkl            <--- [not uploaded - too large] exported random forest model
-   │    ├── model_SVM.pkl           <--- [not uploaded - too large] exported support vector machine model
+   ├── output
+   │    ├── evaluate_KNN.log        <--- log for model evaluation [renamed for KNN]
+   │    ├── evaluate_RF.log         <--- log for model evaluation [renamed for RF]
+   │    ├── evaluate_SVM.log        <--- log for model evaluation [renamed for SVM]
+   │    ├── model_KNN.pkl           <--- exported KNN model [NOT UPLOADED - size too large]                
+   │    ├── model_RF.pkl            <--- exported RF model [NOT UPLOADED - size too large]  
+   │    ├── model_SVM.pkl           <--- exported SVM model [NOT UPLOADED - size too large]  
    │    ├── preprocessed.csv        <--- preprocessed data
    │    ├── preprocessing.log       <--- log for preprocessing
-   │    ├── train.log               <--- log for training
-   │    ├── train_KNN.log           <--- log for training (copied and renamed for KNN)
-   │    ├── train_RF.log            <--- log for training (copied and renamed for RF)
-   │    └── train_SVM.log           <--- log for training (copied and renamed for SVM)
+   │    ├── train_KNN.log           <--- log for training [renamed for KNN]
+   │    ├── train_RF.log           <--- log for training [renamed for RF]
+   │    └── train_SVM.log           <--- log for training [renamed for SVM]
    ├── src                          
    │    ├── config.py               <--- script for setting training parameters
    │    ├── evaluate.py             <--- script to evaluate models
@@ -244,8 +242,19 @@ The procedure for model evaluation is as follows:
    * Can be normalized within each class to account for class imbalance (there are much more Standard and Luxury 
      than Deluxe ticket purchase).
 
-2. Mean accuracy
-   * Common baseline for many types of model since it is a quick and easy-to-interpret assessment of model performance 
+2. Overall accuracy
+   * Common baseline for many classification models since it is a quick and easy-to-interpret metrics
      which calculates the overall percentage of correct classifications across all classes.
+
+3. Classification report
+    * Includes precision, recall, f1-score, and support.
+      * Precision is important for reducing false positives.
+      * Recall is important for reducing false negatives.
+      * F1-score balances precision and recall and is used when both false positives and false negatives are important.
+      * Support counts the number of data points in each class for imbalanced data considerations.
+    * Better metrics for imbalanced data (there are much more Standard and Luxury than Deluxe ticket purchase) as it
+    also calculates metrics for individual classes.
+      * Macro-averaged metrics: computed for each class and averaged
+      * Micro-averaged metrics: computed globally
 
 ## Results
