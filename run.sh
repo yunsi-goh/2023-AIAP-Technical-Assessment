@@ -1,9 +1,9 @@
 #!/bin/bash
 
 
-# Define arguments
-model_type="RF"
-model_name="model_RF"
+# Set model
+model_type="KNN"  # RF: Random Forest | SVM: Support Vector Machine | KNN: K-Nearest Neighbour
+model_name="model_KNN"  # Name of model to export
 
 
 # Parse command-line arguments using the Python script
