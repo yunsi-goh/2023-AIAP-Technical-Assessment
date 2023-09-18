@@ -1,0 +1,9 @@
+2023-09-18 17:26:34,305 - root - INFO - Training data: 90895
+2023-09-18 17:26:34,305 - root - INFO - Testing data: 38955
+2023-09-18 17:26:34,307 - root - INFO - Training K-Nearest Neighbour (KNN) model...
+2023-09-18 17:30:14,833 - root - INFO - PARAMETERS TESTED: {'n_neighbors': [5, 10, 20, 50], 'weights': ['uniform', 'distance'], 'metric': ['minkowski', 'euclidean', 'manhattan']}
+2023-09-18 17:30:14,833 - root - INFO - BEST PARAMETERS: {'metric': 'manhattan', 'n_neighbors': 50, 'weights': 'distance'}
+2023-09-18 17:30:14,833 - root - INFO - BEST MEAN ACCURACY: 0.7790637548820067
+2023-09-18 17:30:14,864 - root - INFO - FINAL MODEL: KNeighborsClassifier(metric='manhattan', n_neighbors=50, weights='distance')
+2023-09-18 17:30:14,864 - root - INFO - Saving final model...
+2023-09-18 17:30:14,879 - root - INFO - Completed in: 0 h 3 min 41 s
