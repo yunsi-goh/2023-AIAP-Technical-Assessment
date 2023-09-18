@@ -1,5 +1,5 @@
 import os
-import argparse
+import logging
 import sqlite3
 import pandas as pd
 import numpy as np
@@ -12,6 +12,7 @@ Functions
 
 def load_cruise_data(in_dir):
     print("Loading data...")
+    logging.info("Loading data...")
 
     # Load pre-trip data
     cruise_pre_con = sqlite3.connect(os.path.join(in_dir, "cruise_pre.db"))
@@ -28,6 +29,7 @@ def load_cruise_data(in_dir):
 
 def rename_cruise_col(cruise):
     print("Renaming columns...")
+    logging.info("Renaming columns...")
 
     # Rename columns
     map_col = {
@@ -61,6 +63,7 @@ def rename_cruise_col(cruise):
 
 def remove_cruise_duplicates(cruise):
     print("Removing duplicates...")
+    logging.info("Removing duplicates...")
 
     # Convert logtime to datetime and sort by logtime
     cruise["log_time"] = pd.to_datetime(cruise.loc[:, "log_time"], format="%d/%m/%Y %H:%M")
@@ -74,13 +77,12 @@ def remove_cruise_duplicates(cruise):
     return cruise
 
 def cruise_ft_eng(cruise):
-    print("Performing feature engineering...")
+    print("Feature engineering...")
+    logging.info("Feature engineering...")
 
     """
     Gender (gender)
     """
-    print("Cleaning [Gender]...")
-
     # One-hot encoding
     cruise["gender_enc"] = cruise["gender"].astype('category').cat.codes
     enc = OneHotEncoder()
@@ -95,8 +97,6 @@ def cruise_ft_eng(cruise):
     """
     Date of Birth (birth_date)
     """
-    print("Cleaning [Date of Birth]...")
-
     # Set current year and max age allowed
     current_year = 2023
     max_age = 116
@@ -112,6 +112,7 @@ def cruise_ft_eng(cruise):
             age = current_year - int(cruise.loc[i, "birth_date"][:4])
         else:
             print("WARNING: Check birth_date for index {}.".format(i))
+            logging.warning("Check birth_date for index {}.".format(i))
 
         # Update age
         if age > max_age:
@@ -125,8 +126,6 @@ def cruise_ft_eng(cruise):
     """
     Source of Traffic (source)
     """
-    print("Cleaning [Source of Traffic]...")
-
     # Split source_type and source_traffic
     cruise["source_type"] = "None"
     for i in cruise.index:
@@ -138,6 +137,7 @@ def cruise_ft_eng(cruise):
             cruise.loc[i, "source_type"] = "Indirect"
         else:
             print("WARNING: Check index {} for source.".format(i))
+            logging.warning("Check index {} for source.".format(i))
 
         # source_traffic
         if "Company Website" in str(cruise.loc[i, "source"]):
@@ -150,6 +150,7 @@ def cruise_ft_eng(cruise):
             cruise.loc[i, "source_traffic"] = "EmailMarketing"
         else:
             print("WARNING: Check index {} for source.".format(i))
+            logging.warning("Check index {} for source.".format(i))
 
     # One-hot encoding
     cruise["source_type_enc"] = cruise["source_type"].astype('category').cat.codes
@@ -169,8 +170,6 @@ def cruise_ft_eng(cruise):
     Onboard Dining Service (dining_impt)
     Onboard Entertainment (entertain_impt)
     """
-    print("Cleaning [Onboard Wifi Service], [Onboard Dining Service], [Onboard Entertainment]...")
-
     # Map importance scale
     map_dict = {
         None: np.nan,
@@ -189,8 +188,6 @@ def cruise_ft_eng(cruise):
     """
     Cruise Name (cruise)
     """
-    print("Cleaning [Cruise Name]...")
-
     # Standardize cruise name
     map_dict = {
         "blast": "Blastoise",
@@ -216,8 +213,6 @@ def cruise_ft_eng(cruise):
     """
     Ticket Type (ticket)
     """
-    print("Cleaning [Ticket Type]...")
-
     # Map price/prestige scale
     map_dict = {
         None: np.nan,
@@ -230,8 +225,6 @@ def cruise_ft_eng(cruise):
     """
     Cruise Distance (distance)
     """
-    print("Cleaning [Cruise Distance]...")
-
     # Convert distance to km
     cruise["distance_km"] = 0
     for i in cruise.index:
@@ -242,14 +235,13 @@ def cruise_ft_eng(cruise):
         elif "Miles" in str(cruise.loc[i, "distance"]):
             cruise.loc[i, "distance_km"] = abs(int(cruise.loc[i, "distance"].split('Miles')[0]) * 1.609)
         else:
-            print("Check index {} for distance.".format(i))
+            print("WARNING: Check index {} for distance.".format(i))
+            logging.warning("Check index {} for distance.".format(i))
     cruise = cruise.drop(["distance"], axis="columns")
 
     """
     Dining (dining_satisfy)
     """
-    print("Cleaning [Dining]...")
-
     # Assume Dining to be missing if other cruise_post entries are missing
     cruise["dining_satisfy"] = cruise["dining_satisfy"].astype("float64")
     for i in cruise.index:
@@ -273,17 +265,6 @@ def cruise_ft_eng(cruise):
     Onboard Service (onboard_svc_impt)
     Cleanliness (clean_impt)
     """
-    print("Cleaning [Embarkation/Disembarkation time convenient], \
-    [Ease of Online booking], \
-    [Gate location], \
-    [Online Check-in], \
-    [Cabin Comfort], \
-    [Cabin Service], \
-    [Baggage Handling], \
-    [Port Check-in Service], \
-    [Onboard Service], \
-    [Cleanliness]...")
-
     # Extract columns
     float_col = cruise[["schedule_impt", "booking_impt", "gate_impt",
                         "online_checkin_impt", "comfort_impt", "cabin_svc_impt",
@@ -297,8 +278,6 @@ def cruise_ft_eng(cruise):
     """
     Old columns
     """
-    print("Removing old columns...")
-
     # Remove old columns that are not useful for prediction
     cruise = cruise.drop(["gender", "source_type", "source_traffic", "cruise"], axis="columns")
 
@@ -306,6 +285,7 @@ def cruise_ft_eng(cruise):
 
 def transform_cruise(cruise):
     print("Applying transformations...")
+    logging.info("Applying transformations...")
 
     # Log numerical columns to reduce skewness and bimodal distribution
     cruise["age_log"] = np.log(cruise["age"])
@@ -315,7 +295,8 @@ def transform_cruise(cruise):
     return cruise
 
 def impute_cruise(cruise):
-    print("Performing data imputation...")
+    print("Data imputation...")
+    logging.info("Data imputation...")
 
     # Create a function to fillna by group
     def fillna_by_group(data, fill_var, group_vars):
@@ -404,7 +385,13 @@ if __name__ == '__main__':
 
     # Set directory
     in_dir = "data"
-    out_dir = "output"
+
+    # Setup logging
+    logging.basicConfig(
+        level=logging.INFO,
+        format="%(asctime)s - %(name)s - %(levelname)s - %(message)s",
+        filename=os.path.join("output", "preprocessing.log")
+    )
 
     # Preprocessing
     data = load_cruise_data(in_dir)  # Load data
@@ -415,8 +402,12 @@ if __name__ == '__main__':
     data = impute_cruise(data)  # Data imputation
 
     # Save preprocessed data
-    if not os.path.exists(out_dir):
-        os.mkdir(out_dir)
-    data.to_csv(os.path.join(out_dir, "preprocessed.csv"), index=False)
+    print("Saving preprocessed data...")
+    logging.info("Saving preprocessed data...")
+    if not os.path.exists("output"):
+        os.mkdir("output")
+    data.to_csv(os.path.join("output", "preprocessed.csv"), index=False)
 
     print("Completed!")
+    logging.info("Completed!")
+    logging.shutdown()

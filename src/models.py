@@ -1,5 +1,6 @@
 import pandas as pd
 import config as cfg
+import logging
 from sklearn.model_selection import GridSearchCV
 from sklearn import preprocessing, svm
 from sklearn.ensemble import RandomForestClassifier
@@ -15,8 +16,14 @@ def train_RF(X_train, y_train):
     grid = cfg.RF_params
     grid_clf = GridSearchCV(estimator=model, param_grid=grid)
     grid_clf.fit(X_train, y_train)
-    print("\nBEST RF PARAMETERS:", grid_clf.best_params_)
-    print("BEST RF MEAN ACCURACY:", grid_clf.best_score_)
+
+    # Log grid search results
+    print("\nPARAMETERS TESTED:\n", grid)
+    logging.info(f"PARAMETERS TESTED: {grid}")
+    print("\nBEST PARAMETERS:\n", grid_clf.best_params_)
+    logging.info(f"BEST PARAMETERS: {grid_clf.best_params_}")
+    print("\nBEST MEAN ACCURACY:\n", grid_clf.best_score_)
+    logging.info(f"BEST MEAN ACCURACY: {grid_clf.best_score_}")
 
     # Train using best parameters
     best_clf = grid_clf.best_estimator_
@@ -24,10 +31,17 @@ def train_RF(X_train, y_train):
 
     # Get feature importance
     impt_features = pd.DataFrame(best_clf.feature_importances_, index=X_train.columns)\
-        .rename(columns={0: "importance"})\
-        .sort_values(by="importance", ascending=False)
-    print("RF FEATURE IMPORTANCE:")
-    print(impt_features)
+        .rename(columns={0: " "})\
+        .sort_values(by=" ", ascending=False)\
+        .rename(index=cfg.rename_columns)
+
+    # Log feature importance
+    print("\nFEATURE IMPORTANCE:\n", impt_features)
+    logging.info(f"FEATURE IMPORTANCE: {impt_features}")
+
+    # Log final model
+    print("\nFINAL MODEL:\n", best_clf)
+    logging.info(f"FINAL MODEL: {best_clf}")
 
     return best_clf
 
@@ -44,12 +58,22 @@ def train_SVM(X_train, y_train):
     grid = cfg.SVM_params
     grid_clf = GridSearchCV(estimator=model, param_grid=grid)
     grid_clf.fit(X_train, y_train)
-    print("\nBEST SVM PARAMETERS:", grid_clf.best_params_)
-    print("BEST SVM MEAN ACCURACY:", grid_clf.best_score_)
+
+    # Log grid search results
+    print("\nPARAMETERS TESTED:\n", grid)
+    logging.info(f"PARAMETERS TESTED: {grid}")
+    print("\nBEST PARAMETERS:\n", grid_clf.best_params_)
+    logging.info(f"BEST PARAMETERS: {grid_clf.best_params_}")
+    print("\nBEST MEAN ACCURACY:\n", grid_clf.best_score_)
+    logging.info(f"BEST MEAN ACCURACY: {grid_clf.best_score_}")
 
     # Train using best parameters
     best_clf = grid_clf.best_estimator_
     best_clf.fit(X_train, y_train)
+
+    # Log final model
+    print("\nFINAL MODEL:\n", best_clf)
+    logging.info(f"FINAL MODEL: {best_clf}")
 
     return best_clf
 
@@ -63,11 +87,21 @@ def train_KNN(X_train, y_train):
     grid = cfg.KNN_params
     grid_clf = GridSearchCV(estimator=model, param_grid=grid)
     grid_clf.fit(X_train, y_train)
-    print("\nBEST KNN PARAMETERS:", grid_clf.best_params_)
-    print("BEST KNN MEAN ACCURACY:", grid_clf.best_score_)
+
+    # Log grid search results
+    print("\nPARAMETERS TESTED:\n", grid)
+    logging.info(f"PARAMETERS TESTED: {grid}")
+    print("\nBEST PARAMETERS:\n", grid_clf.best_params_)
+    logging.info(f"BEST PARAMETERS: {grid_clf.best_params_}")
+    print("\nBEST MEAN ACCURACY:\n", grid_clf.best_score_)
+    logging.info(f"BEST MEAN ACCURACY: {grid_clf.best_score_}")
 
     # Train using best parameters
     best_clf = grid_clf.best_estimator_
     best_clf.fit(X_train, y_train)
+
+    # Log final model
+    print("\nFINAL MODEL:\n", best_clf)
+    logging.info(f"FINAL MODEL: {best_clf}")
 
     return best_clf
