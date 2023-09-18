@@ -97,6 +97,85 @@ The procedure for model evaluation is as follows:
 
 ## Key findings from EDA
 
+* Individual features:
+
+| Attribute                                      | Key findings                                                                                                                 |
+|------------------------------------------------|------------------------------------------------------------------------------------------------------------------------------|
+| Gender                                         | * Object type<br>* Nominal categorical data                                                                                  |
+| Date of Birth                                  | * Object type (format not standardized)<br>* Can be converted to datetime type<br>* Can be converted to numerical data (age) |
+| Source of Traffic                              | * Object type<br>* Nominal categorical data                                                                                  |
+| Onboard Wifi Service                           | * Object type<br>* Can be converted to float type and ordinal categorical data using importance scale                        |
+| Embarkation/Disembark<br>ation time convenient | * Float type<br>* Ordinal categorical data based on importance scale                                                         |
+| Ease of Online booking                         | * Float type<br>* Ordinal categorical data based on importance scale                                                         |
+| Gate location                                  | * Float type<br>* Ordinal categorical data based on importance scale                                                         |
+| Logging                                        | * Object type<br>* Can be converted to datetime type<br>* May not be useful for prediction                                   |
+| Onboard Dining Service                         | * Object type<br>* Can be converted to float type and ordinal categorical data using importance scale                        |
+| Online Check-in                                | * Float type<br>* Ordinal categorical data based on importance scale                                                         |
+| Cabin Comfort                                  | * Float type<br>* Ordinal categorical data based on importance scale                                                         |
+| Onboard Entertainment                          | * Object type<br>* Can be converted to float type and ordinal categorical data using importance scale                        |
+| Cabin Service                                  | * Float type<br>* Ordinal categorical data based on importance scale                                                         |
+| Baggage Handling                               | * Float type<br>* Ordinal categorical data based on importance scale                                                         |
+| Port Check-in Service                          | * Float type<br>* Ordinal categorical data based on importance scale                                                         |
+| Onboard Service                                | * Float type<br>* Ordinal categorical data based on importance scale                                                         |
+| Cleanliness                                    | * Float type<br>* Ordinal categorical data based on importance scale                                                         |
+| Ext_Intcode                                    | * Object type<br>* May not be useful for prediction                                                                          |
+| Cruise Name                                    | * Object type (name not standardized) <br>* Nominal categorical data                                                         |
+| Ticket Type                                    | * Object type<br>* Can be converted to ordinal categorical data based on ticket price/prestige                               |
+| Cruise Distance                                | * Object type (unit not standardized)<br>* Can be converted to numerical data (distance in km)                               |
+| WiFi                                           | * Float type<br>* Binary categorical data<br>* Large proportion of data missing                                              |
+| Dining                                         | * Int type<br>* Binary categorical data<br>* Unusual that there is no NaN                                                    |
+| Entertainment                                  | * Float type<br>* Binary categorical data<br>* Large proportion of data missing                                              |    
+
+* Univariate analysis
+  * Age of passenger has a bimodal distribution.
+  * Distance of cruise is right-skewed and consists of outliers (although it is possible for a cruise to travel very 
+    long distances if it refuels).
+  * Passengers seem to value these variable more: 
+    * Embarkation/Disembarkation time convenience
+    * Onboard Dining Service
+    * Online Check-in
+    * Cabin Comfort
+    * Onboard Entertainment
+    * Cabin Service
+    * Baggage Handling
+    * Port Check-in Service
+    * Onboard Service
+    * Cleanliness
+  * Passengers seem to value these variable less:
+    * Onboard Wifi Service
+    * Ease of Online Booking
+    * Gate location
+  * Most passengers purchased Standard and Luxury tickets. Deluxe tickets are much less in-demand.
+  * There are mixed feelings (around half-half) on satisfcation level of WiFi, Dining, and Entertainment.
+  * There are about equal number of male and female passengers. 
+  * Most passengers heard about or booked the cruise through direct channels (Company Website / Email Marketing) instead of indirect channels (Social Media / Search Engine).
+  * Blastoise cruise is more popular than Lapras cruise.
+
+* Bivariate analysis
+  * Age of passenger and distance of cruise do not seem to be correlated.
+  * Overall, these variables may be correlated:
+    * Cruise Name - Onboard Wifi Service 
+    * Source of Traffic - Embarkation/Disembarkation time convenient 
+    * Cruise Name - Ease of Online booking 
+    * Cruise Name - Online Check-in 
+    * Source of Traffic - Online Check-in 
+    * Cruise Name - Cabin Comfort 
+    * Source of Traffic - Cabin Comfort 
+    * Cruise Name - Onboard Entertainment
+    * Source of Traffic - Onboard Entertainment
+    * Cruise Name - Cabin Service  
+    * Source of Traffic - Cabin Service
+    * Cruise Name - Cleanliness 
+    * Source of Traffic - Cleanliness 
+    * Cruise Name - Ticket Type  
+    * Source of Traffic - Ticket Type  
+  * As these are categorical data with few classes, it is hard to determine any trends in their relationships.
+
+* Multivariate analysis
+  * Overall, these variable may have some correlations:
+    * Ease of Online Booking, Onboard Wifi Service, Gate location, Embarkation/Disembarkation time convenient 
+    * Cabin Comfort, Onboard Dining Servic, Onboard Entertainment, Cleanliness 
+    * Baggage Handling, Cabin Service, Onboard Service
 
 ## Features preprocessing
 * Pre-trip data and post-trip data are joined by `index` and `Ext_Intcode`.
@@ -126,10 +205,9 @@ The procedure for model evaluation is as follows:
 | Cruise Name                                 | * Standardize name: Blastoise / Lapras<br>* One-hot encoding                                                                                                            | -                                                  | * None column dropped after one-hot encoding                                   |
 | Ticket Type                                 | * Converted to numbers using price/prestige of tickets                                                                                                                  | -                                                  | * Missing data filled with median after grouping by possibly related variables |
 | Cruise Distance                             | * Standardize unit: km<br>* Convert negative distance to positive (absolute distance)                                                                                   | * Distances are log-transformed to reduce skewness | * Missing data filled with simple median imputation                            |
-| WiFi                                        | * Assume 0 (not in importance scale) to be missing data                                                                                                                 | -                                                  | * Dropped as a large proportion is missing data                                |
+| WiFi                                        | -                                                                                                                                                                       | -                                                  | * Dropped as a large proportion is missing data                                |
 | Dining                                      | * Assume missing if all other post-trip information are missing                                                                                                         | -                                                  | * Missing data filled with simple median imputation                            |
-| Entertainment                               | * Assume 0 (not in importance scale) to be missing data                                                                                                                 | -                                                  | * Dropped as a large proportion is missing data                                |
-
+| Entertainment                               | -                                                                                                                                                                       | -                                                  | * Dropped as a large proportion is missing data                                |
 
 ## Choice of models
 1. Random Forest (RF)
@@ -138,7 +216,7 @@ The procedure for model evaluation is as follows:
    * Commonly used in other customer behaviour prediction problems as it works well with various unknown distributions
      and non-linear relationships (since there are only 3 ticket types, it is unclear what are the x-y relationships).
    * Able to handle both the numerical and categorical variables (both can be found in the dataset).
-   * * Works with multiclass classification and regression (since there are 3 target label ticket types)
+   * Works with multiclass classification (since there are 3 target label ticket types)
    * Provides feature importance information.
    
 2. Support Vector Machine (SVM)
@@ -146,7 +224,7 @@ The procedure for model evaluation is as follows:
      to create complex decision boundary in hyperplane.
    * Less affected by outliers as the margin can be adjusted to ignore some outliers (which were not removed during 
      preprocessing).
-   * Works with multiclass classification and regression (since there are 3 target label ticket types)
+   * Works with multiclass classification (since there are 3 target label ticket types)
    * Generalizes well and minimizes overfitting via regularization.
    * Linear kernel can provide feature importance information.
    
@@ -154,15 +232,20 @@ The procedure for model evaluation is as follows:
    * Work well with various unknown distributions and non-linear relationships (since there are only 3 ticket types, 
      it is unclear what are the x-y relationships).
    * Less affected by outliers (which were not removed during preprocessing) as nearby neighbours have larger effect.
-   * Less affected by imbalanced classes (there are mucg more Standard and Luxury than Deluxe ticket purchase) 
+   * Less affected by imbalanced classes (there are much more Standard and Luxury than Deluxe ticket purchase) 
      as nearby neighbours have larger effect.
    * Fast (since there are 90895 training data with 26 features each) as it does not require training.
-   * Works with multiclass classification and regression (since there are 3 target label ticket types)
-   
+   * Works with multiclass classification (since there are 3 target label ticket types)
 
 ## Choice of evaluation metrics
-   * Confusion matrix:
-   * Normalized confusion matrix
-   * Mean accuracy
+1. Confusion matrix 
+   * Good visualization for multi-class problems (since there are 3 target label ticket types) as it provides a
+     quantitative summary of how well the model performs for each class.
+   * Can be normalized within each class to account for class imbalance (there are much more Standard and Luxury 
+     than Deluxe ticket purchase).
+
+2. Mean accuracy
+   * Common baseline for many types of model since it is a quick and easy-to-interpret assessment of model performance 
+     which calculates the overall percentage of correct classifications across all classes.
 
 ## Results
