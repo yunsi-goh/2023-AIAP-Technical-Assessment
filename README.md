@@ -134,23 +134,34 @@ The procedure for model evaluation is as follows:
 ## Choice of models
 1. Random Forest (RF)
    * Accurate, generalizes well, and minimizes overfitting by using an ensemble of decision trees.
-   * Due to the ensemble method, it is less affected by outliers (outliers were not removed during preprocessing).
-   * Commonly used in other customer behaviour prediction problems as it works well with unknown distributions.
-   * Able to handle both the numerical and categorical variables found in the dataset.
+   * Due to the ensemble method, it is less affected by outliers (which were not removed during preprocessing).
+   * Commonly used in other customer behaviour prediction problems as it works well with various unknown distributions
+     and non-linear relationships (since there are only 3 ticket types, it is unclear what are the x-y relationships).
+   * Able to handle both the numerical and categorical variables (both can be found in the dataset).
+   * * Works with multiclass classification and regression (since there are 3 target label ticket types)
    * Provides feature importance information.
    
 2. Support Vector Machine (SVM)
-   * Accurate even with high dimensions (preprocessed data contains 26 features) as different kernels can be used.
-   * Generalizes well and minimizes overfitting via regularization
-   * Less affected by outliers as the margin can be adjusted to ignore some outliers.
-   * Linear kernel provides feature importance information.
+   * Accurate even with high dimensions (preprocessed data contains 26 features) as different kernels can be used
+     to create complex decision boundary in hyperplane.
+   * Less affected by outliers as the margin can be adjusted to ignore some outliers (which were not removed during 
+     preprocessing).
+   * Works with multiclass classification and regression (since there are 3 target label ticket types)
+   * Generalizes well and minimizes overfitting via regularization.
+   * Linear kernel can provide feature importance information.
    
 3. K-Nearest Neighbour (KNN)
-
+   * Work well with various unknown distributions and non-linear relationships (since there are only 3 ticket types, 
+     it is unclear what are the x-y relationships).
+   * Less affected by outliers (which were not removed during preprocessing) as nearby neighbours have larger effect.
+   * Less affected by imbalanced classes (there are mucg more Standard and Luxury than Deluxe ticket purchase) 
+     as nearby neighbours have larger effect.
+   * Fast (since there are 90895 training data with 26 features each) as it does not require training.
+   * Works with multiclass classification and regression (since there are 3 target label ticket types)
    
 
 ## Choice of evaluation metrics
-   * Confusion matrix
+   * Confusion matrix:
    * Normalized confusion matrix
    * Mean accuracy
 
