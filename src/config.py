@@ -12,9 +12,9 @@ RF_params = {
 
 # Support vector machine parameters
 SVM_params = {
-    'C': [1e-2, 1e-1, 1e-0, 1e1, 1e2],
-    'gamma': [1e-2, 1e-1, 1e-0, 1e1, 1e2],
-    'kernel': ['rbf', 'sigmoid', 'poly', 'linear'],
+    'C': [1e-1, 1e-0, 1e1],
+    'gamma': [1e-1, 1e-0, 1e1],
+    'kernel': ['rbf', 'poly', 'linear'],
     'random_state': [random_state]
 }
 
