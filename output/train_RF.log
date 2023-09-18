@@ -3,7 +3,7 @@
 2023-09-18 10:02:50,691 - root - INFO - Training Random Forest (RF) model...
 2023-09-18 10:57:31,569 - root - INFO - PARAMETERS TESTED: {'n_estimators': [100, 200, 500, 1000], 'max_depth': [None, 2, 5, 10], 'max_features': ['sqrt', 'log2'], 'random_state': [42]}
 2023-09-18 10:57:31,570 - root - INFO - BEST PARAMETERS: {'max_depth': None, 'max_features': 'log2', 'n_estimators': 1000, 'random_state': 42}
-2023-09-18 10:57:31,571 - root - INFO - BEST MEAN ACCURACY: 0.8061279498322239
+2023-09-18 10:57:31,571 - root - INFO - BEST ACCURACY: 0.8061279498322239
 2023-09-18 10:59:12,901 - root - INFO - FEATURE IMPORTANCE:
 Cruise Distance (km, log-transformed)         0.151664
 Online Check-in                               0.135244
@@ -34,5 +34,3 @@ Source of Traffic - Direct - Email Marketing  0.004636
 2023-09-18 10:59:12,906 - root - INFO - FINAL MODEL: RandomForestClassifier(max_features='log2', n_estimators=1000, random_state=42)
 2023-09-18 10:59:12,906 - root - INFO - Saving final model...
 2023-09-18 10:59:14,963 - root - INFO - Completed in: 0 h 56 min 24 s
-2023-09-18 11:08:15,974 - root - INFO - Training data: 90895
-2023-09-18 11:08:15,974 - root - INFO - Testing data: 38955

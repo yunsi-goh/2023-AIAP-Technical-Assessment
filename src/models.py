@@ -22,8 +22,8 @@ def train_RF(X_train, y_train):
     logging.info(f"PARAMETERS TESTED: {grid}")
     print("\nBEST PARAMETERS:\n", grid_clf.best_params_)
     logging.info(f"BEST PARAMETERS: {grid_clf.best_params_}")
-    print("\nBEST MEAN ACCURACY:\n", grid_clf.best_score_)
-    logging.info(f"BEST MEAN ACCURACY: {grid_clf.best_score_}")
+    print("\nBEST ACCURACY:\n", grid_clf.best_score_)
+    logging.info(f"BEST ACCURACY: {grid_clf.best_score_}")
 
     # Train using best parameters
     best_clf = grid_clf.best_estimator_
@@ -64,8 +64,8 @@ def train_SVM(X_train, y_train):
     logging.info(f"PARAMETERS TESTED: {grid}")
     print("\nBEST PARAMETERS:\n", grid_clf.best_params_)
     logging.info(f"BEST PARAMETERS: {grid_clf.best_params_}")
-    print("\nBEST MEAN ACCURACY:\n", grid_clf.best_score_)
-    logging.info(f"BEST MEAN ACCURACY: {grid_clf.best_score_}")
+    print("\nBEST ACCURACY:\n", grid_clf.best_score_)
+    logging.info(f"BEST ACCURACY: {grid_clf.best_score_}")
 
     # Train using best parameters
     best_clf = grid_clf.best_estimator_
@@ -93,8 +93,8 @@ def train_KNN(X_train, y_train):
     logging.info(f"PARAMETERS TESTED: {grid}")
     print("\nBEST PARAMETERS:\n", grid_clf.best_params_)
     logging.info(f"BEST PARAMETERS: {grid_clf.best_params_}")
-    print("\nBEST MEAN ACCURACY:\n", grid_clf.best_score_)
-    logging.info(f"BEST MEAN ACCURACY: {grid_clf.best_score_}")
+    print("\nBEST ACCURACY:\n", grid_clf.best_score_)
+    logging.info(f"BEST ACCURACY: {grid_clf.best_score_}")
 
     # Train using best parameters
     best_clf = grid_clf.best_estimator_
