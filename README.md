@@ -12,15 +12,15 @@
    ├── output
    │    ├── evaluate_KNN.log        <--- log for model evaluation [renamed for KNN]
    │    ├── evaluate_RF.log         <--- log for model evaluation [renamed for RF]
-   │    ├── evaluate_SVM.log        <--- log for model evaluation [renamed for SVM]
+   │    ├── evaluate_SVM.log        <--- log for model evaluation [NOT UPLOADED - unable to finish training]
    │    ├── model_KNN.pkl           <--- exported KNN model             
    │    ├── model_RF.pkl            <--- exported RF model [NOT UPLOADED - size too large]  
-   │    ├── model_SVM.pkl           <--- exported SVM model [NOT UPLOADED - size too large]  
+   │    ├── model_SVM.pkl           <--- exported SVM model [NOT UPLOADED - unable to finish training]
    │    ├── preprocessed.csv        <--- preprocessed data
    │    ├── preprocessing.log       <--- log for preprocessing
    │    ├── train_KNN.log           <--- log for training [renamed for KNN]
    │    ├── train_RF.log           <--- log for training [renamed for RF]
-   │    └── train_SVM.log           <--- log for training [renamed for SVM]
+   │    └── train_SVM.log           <--- log for training [NOT UPLOADED - unable to finish training]
    ├── src                          
    │    ├── config.py               <--- script for setting training parameters
    │    ├── evaluate.py             <--- script to evaluate models
@@ -36,6 +36,8 @@
    ├── requirements.txt             <--- dependencies
    └── run.sh                       <--- executable bash script
 ``` 
+
+* NOTE: Due to time constraints, SVM model was not able to finish training.
 
 # Code flow
 
@@ -259,6 +261,8 @@ The procedure for model evaluation is as follows:
 
 ## Results
 
+NOTE: Due to time constraints, SVM model was not able to finish training.
+
 The table below summarizes the results from model training and evaluation. For more details, refer to logs.
 
 |                                   | Random Forest (RF)                                                                                                                                             | Support Vector Machine (SVM) | K-Nearest Neighbour (KNN)                                                                                                                                      |
@@ -269,7 +273,6 @@ The table below summarizes the results from model training and evaluation. For m
 | Training overall scores           | accuracy = 1.0<br>precision_macro = 1.0<br>precision_micro = 1.0<br>recall_macro = 1.0<br>recall_micro = 1.0<br>f1_macro = 1.0<br>f1_micro = 1.0               |                              | accuracy = 1.0<br>precision_macro = 1.0<br>precision_micro = 1.0<br>recall_macro = 1.0<br>recall_micro = 1.0<br>f1_macro = 1.0<br>f1_micro = 1.0               |
 | Testing overall scores            | accuracy = 0.803<br>precision_macro = 0.618<br>precision_micro = 0.771<br>recall_macro = 0.573<br>recall_micro = 0.803<br>f1_macro = 0.555<br>f1_micro = 0.777 |                              | accuracy = 0.776<br>precision_macro = 0.518<br>precision_micro = 0.727<br>recall_macro = 0.553<br>recall_micro = 0.776<br>f1_macro = 0.535<br>f1_micro = 0.750 |
 
-* NOTE: Due to time constraints, SVM model was not able to finish running.
 * Discussion
   * From the higher training scores and lower testing scores for RF and KNN, both models seem to overfit.
   * Comparing RF and KNN testing scores, RF performed better.
