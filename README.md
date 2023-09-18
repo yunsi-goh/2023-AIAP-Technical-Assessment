@@ -19,7 +19,7 @@
    │    ├── preprocessed.csv        <--- preprocessed data
    │    ├── preprocessing.log       <--- log for preprocessing
    │    ├── train_KNN.log           <--- log for training [renamed for KNN]
-   │    ├── train_RF.log           <--- log for training [renamed for RF]
+   │    ├── train_RF.log            <--- log for training [renamed for RF]
    │    └── train_SVM.log           <--- log for training [NOT UPLOADED - unable to finish training]
    ├── src                          
    │    ├── config.py               <--- script for setting training parameters
