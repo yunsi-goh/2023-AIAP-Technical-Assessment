@@ -2,7 +2,7 @@ import os
 import argparse
 import datetime
 from load import load_preprocessed
-from models import train_RF, train_SVM
+from models import train_RF, train_SVM, train_KNN
 import joblib
 
 
@@ -29,6 +29,10 @@ if __name__ == '__main__':
         print("Training Support Vector Machine model...")
         model = train_SVM(X_train, y_train)
         print("Saving Support Vector Machine model...")
+    elif args.model_type == "KNN":
+        print("Training K-Nearest Neighbour model...")
+        model = train_KNN(X_train, y_train)
+        print("Saving K-Nearest Neighbour model...")
     else:
         print("WARNING: Choose a valid model: RF / SVM / KNN")
     joblib.dump(model, os.path.join("output", args.model_name+".pkl"))
