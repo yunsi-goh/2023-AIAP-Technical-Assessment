@@ -1,0 +1,38 @@
+2023-09-18 10:02:50,689 - root - INFO - Training data: 90895
+2023-09-18 10:02:50,690 - root - INFO - Testing data: 38955
+2023-09-18 10:02:50,691 - root - INFO - Training Random Forest (RF) model...
+2023-09-18 10:57:31,569 - root - INFO - PARAMETERS TESTED: {'n_estimators': [100, 200, 500, 1000], 'max_depth': [None, 2, 5, 10], 'max_features': ['sqrt', 'log2'], 'random_state': [42]}
+2023-09-18 10:57:31,570 - root - INFO - BEST PARAMETERS: {'max_depth': None, 'max_features': 'log2', 'n_estimators': 1000, 'random_state': 42}
+2023-09-18 10:57:31,571 - root - INFO - BEST MEAN ACCURACY: 0.8061279498322239
+2023-09-18 10:59:12,901 - root - INFO - FEATURE IMPORTANCE:
+Cruise Distance (km, log-transformed)         0.151664
+Online Check-in                               0.135244
+Age (log-transformed)                         0.094441
+Cruise Name - Lapras                          0.059793
+Port Check-in Service                         0.044377
+Cabin service                                 0.043410
+Baggage handling                              0.041913
+Onboard Service                               0.040732
+Cabin Comfort                                 0.040224
+Onboard Wifi Service                          0.039973
+Gate location                                 0.039443
+Embarkation/Disembarkation time convenient    0.038641
+Onboard Entertainment                         0.033271
+Ease of Online booking                        0.031583
+Cleanliness                                   0.028608
+Onboard Dining Service                        0.028518
+Dining                                        0.017417
+Gender - Male                                 0.015143
+Gender - Female                               0.014483
+Cruise Name - Blastoise                       0.011700
+Source of Traffic - Direct                    0.010384
+Source of Traffic - Indirect                  0.010157
+Source of Traffic - Direct - Company Website  0.009786
+Source of Traffic - Indirect - Social Media   0.009656
+Source of Traffic - Indirect - Search Engine  0.004805
+Source of Traffic - Direct - Email Marketing  0.004636
+2023-09-18 10:59:12,906 - root - INFO - FINAL MODEL: RandomForestClassifier(max_features='log2', n_estimators=1000, random_state=42)
+2023-09-18 10:59:12,906 - root - INFO - Saving final model...
+2023-09-18 10:59:14,963 - root - INFO - Completed in: 0 h 56 min 24 s
+2023-09-18 11:08:15,974 - root - INFO - Training data: 90895
+2023-09-18 11:08:15,974 - root - INFO - Testing data: 38955
