@@ -152,5 +152,6 @@ cython_debug/
 .idea/
 
 # Output
+model_SVM.pkl
 model_RF.pkl
 model_SVM.pkl
