@@ -22,6 +22,5 @@ SVM_params = {
 KNN_params = {
     'n_neighbors': [5, 10, 15, 20],
     'weights': ['uniform', 'distance'],
-    'metric' : ['minkowski', 'euclidean', 'manhattan'],
-    'random_state': [random_state]
+    'metric' : ['minkowski', 'euclidean', 'manhattan']
 }
