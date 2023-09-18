@@ -13,7 +13,7 @@
    │    ├── evaluate_KNN.log        <--- log for model evaluation [renamed for KNN]
    │    ├── evaluate_RF.log         <--- log for model evaluation [renamed for RF]
    │    ├── evaluate_SVM.log        <--- log for model evaluation [renamed for SVM]
-   │    ├── model_KNN.pkl           <--- exported KNN model [NOT UPLOADED - size too large]                
+   │    ├── model_KNN.pkl           <--- exported KNN model             
    │    ├── model_RF.pkl            <--- exported RF model [NOT UPLOADED - size too large]  
    │    ├── model_SVM.pkl           <--- exported SVM model [NOT UPLOADED - size too large]  
    │    ├── preprocessed.csv        <--- preprocessed data
@@ -268,3 +268,11 @@ The table below summarizes the results from model training and evaluation. For m
 | Best model obtained from training | n_estimators = 1000<br>max_depth = None<br>max_features = log2<br>accuracy = 0.806                                                                             |                              | n_neighbours = 50<br>weights = 'distance'<br>metric = 'manhattan'<br>accuracy = 0.779                                                                          |
 | Training overall scores           | accuracy = 1.0<br>precision_macro = 1.0<br>precision_micro = 1.0<br>recall_macro = 1.0<br>recall_micro = 1.0<br>f1_macro = 1.0<br>f1_micro = 1.0               |                              | accuracy = 1.0<br>precision_macro = 1.0<br>precision_micro = 1.0<br>recall_macro = 1.0<br>recall_micro = 1.0<br>f1_macro = 1.0<br>f1_micro = 1.0               |
 | Testing overall scores            | accuracy = 0.803<br>precision_macro = 0.618<br>precision_micro = 0.771<br>recall_macro = 0.573<br>recall_micro = 0.803<br>f1_macro = 0.555<br>f1_micro = 0.777 |                              | accuracy = 0.776<br>precision_macro = 0.518<br>precision_micro = 0.727<br>recall_macro = 0.553<br>recall_micro = 0.776<br>f1_macro = 0.535<br>f1_micro = 0.750 |
+
+* NOTE: Due to time constraints, SVM model was not able to finish running.
+* Discussion
+  * From the higher training scores and lower testing scores for RF and KNN, both models seem to overfit.
+  * Comparing RF and KNN testing scores, RF performed better.
+  * From "output/evaluate_RF.log", RF was able to classify Standard and Luxury tickets relatively well.
+    However, there were a lot of misclassification (false negatives) for Deluxe tickets. This could be due to
+    imbalance classes (there were not enough training points for Deluxe tickets). This is also a problem in KNN.
