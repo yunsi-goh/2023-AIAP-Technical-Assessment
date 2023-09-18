@@ -3,25 +3,26 @@
 * Email: gohgys97@gmail.com
 
 # Folder structure
-
 ```
    .
    ├── .github     
-   ├── data                         <--- [not uploaded] input data folder
+   ├── data                         <--- [not uploaded - as per instruction] input data folder
    │    ├── cruise_pre.db
    │    └── cruise_post.db
-   ├── output         
+   ├── output        
+   │    ├── evaluate.log            <--- log for model evaluation
    │    ├── evaluate_KNN.log        <--- log for model evaluation (renamed for KNN)
-   │    ├── evaluate_RF.log         <--- log for model evaluation (renamed for RF)
-   │    ├── evaluate_SVM.log        <--- log for model evaluation (renamed for SVM)
+   │    ├── evaluate_RF.log         <--- log for model evaluation (copied and renamed for RF)
+   │    ├── evaluate_SVM.log        <--- log for model evaluation (copied and renamed for SVM)
    │    ├── model_KNN.pkl           <--- exported k-nearest neighbour model                     
-   │    ├── model_RF.pkl            <--- [not uploaded] exported random forest model
-   │    ├── model_SVM.pkl           <--- [not uploaded] exported support vector machine model
+   │    ├── model_RF.pkl            <--- [not uploaded - too large] exported random forest model
+   │    ├── model_SVM.pkl           <--- [not uploaded - too large] exported support vector machine model
    │    ├── preprocessed.csv        <--- preprocessed data
    │    ├── preprocessing.log       <--- log for preprocessing
-   │    ├── train_KNN.log           <--- log for training (renamed for KNN)
-   │    ├── train_RF.log            <--- log for training (renamed for RF)
-   │    └── train_SVM.log           <--- log for training (renamed for SVM)
+   │    ├── train.log               <--- log for training
+   │    ├── train_KNN.log           <--- log for training (copied and renamed for KNN)
+   │    ├── train_RF.log            <--- log for training (copied and renamed for RF)
+   │    └── train_SVM.log           <--- log for training (copied and renamed for SVM)
    ├── src                          
    │    ├── config.py               <--- script for setting training parameters
    │    ├── evaluate.py             <--- script to evaluate models
