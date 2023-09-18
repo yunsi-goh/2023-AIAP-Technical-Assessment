@@ -1,1 +1,4 @@
+2023-09-18 11:08:15,982 - root - INFO - Training data: 90895
+2023-09-18 11:08:15,982 - root - INFO - Testing data: 38955
 2023-09-18 11:08:15,984 - root - INFO - Training Support Vector Machine (SVM) model...
+
