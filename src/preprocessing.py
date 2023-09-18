@@ -387,6 +387,8 @@ if __name__ == '__main__':
     in_dir = "data"
 
     # Setup logging
+    if not os.path.exists("output"):
+        os.mkdir("output")
     logging.basicConfig(
         level=logging.INFO,
         format="%(asctime)s - %(name)s - %(levelname)s - %(message)s",
@@ -404,8 +406,6 @@ if __name__ == '__main__':
     # Save preprocessed data
     print("Saving preprocessed data...")
     logging.info("Saving preprocessed data...")
-    if not os.path.exists("output"):
-        os.mkdir("output")
     data.to_csv(os.path.join("output", "preprocessed.csv"), index=False)
 
     print("Completed!")
