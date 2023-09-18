@@ -2,8 +2,8 @@
 
 
 # Define arguments
-model_type="KNN"
-model_name="model_KNN"
+model_type="RF"
+model_name="model_RF"
 
 
 # Parse command-line arguments using the Python script
