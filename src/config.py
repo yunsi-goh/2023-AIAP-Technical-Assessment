@@ -14,7 +14,7 @@ RF_params = {
 SVM_params = {
     'C': [1e-1, 1e-0, 1e1],
     'gamma': [1e-1, 1e-0, 1e1],
-    'kernel': ['rbf', 'poly', 'linear'],
+    'kernel': ['linear'],  # Only linear is tested due to large dataset
     'random_state': [random_state]
 }
 
