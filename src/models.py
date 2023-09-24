@@ -49,7 +49,9 @@ def train_RF(X_train, y_train):
 def train_SVM(X_train, y_train):
 
     # SVM works better with normalized data
-    X_train = preprocessing.scale(X_train)
+    scaler = preprocessing.StandardScaler().fit(X_train)
+    scaler.transform(X_train)
+    scaler.transform(y_train)
 
     # Define model
     model = svm.SVC()
