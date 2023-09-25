@@ -12,15 +12,15 @@
    ├── output
    │    ├── evaluate_KNN.log        <--- log for model evaluation [renamed for KNN]
    │    ├── evaluate_RF.log         <--- log for model evaluation [renamed for RF]
-   │    ├── evaluate_SVM.log        <--- log for model evaluation [NOT UPLOADED - unable to finish training]
+   │    ├── evaluate_SVM.log        <--- log for model evaluation [NOT UPLOADED - still training SVM]
    │    ├── model_KNN.pkl           <--- exported KNN model             
    │    ├── model_RF.pkl            <--- exported RF model [NOT UPLOADED - size too large]  
-   │    ├── model_SVM.pkl           <--- exported SVM model [NOT UPLOADED - unable to finish training]
+   │    ├── model_SVM.pkl           <--- exported SVM model [NOT UPLOADED - still training SVM]
    │    ├── preprocessed.csv        <--- preprocessed data
    │    ├── preprocessing.log       <--- log for preprocessing
    │    ├── train_KNN.log           <--- log for training [renamed for KNN]
    │    ├── train_RF.log            <--- log for training [renamed for RF]
-   │    └── train_SVM.log           <--- log for training [NOT UPLOADED - unable to finish training]
+   │    └── train_SVM.log           <--- log for training [NOT UPLOADED - still training SVM]
    ├── src                          
    │    ├── config.py               <--- script for setting training parameters
    │    ├── evaluate.py             <--- script to evaluate models
@@ -37,7 +37,7 @@
    └── run.sh                       <--- executable bash script
 ``` 
 
-* NOTE: Due to time constraints, SVM model was not able to finish training.
+* NOTE: SVM model is still in the process of training.
 
 # Code flow
 
@@ -261,7 +261,7 @@ The procedure for model evaluation is as follows:
 
 ## Results
 
-NOTE: Due to time constraints, SVM model was not able to finish training.
+* NOTE: SVM model is still in the process of training.
 
 The table below summarizes the results from model training and evaluation. For more details, refer to logs.
 
